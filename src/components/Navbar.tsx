@@ -1,4 +1,8 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const links = [
   { href: "/", label: "Home" },
@@ -8,23 +12,53 @@ const links = [
 ];
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    function handleScroll() {
+      setScrolled(window.scrollY > 24);
+    }
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 border-b border-black/10 bg-white/70 backdrop-blur-md dark:border-white/10 dark:bg-black/50">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
-        <Link href="/" className="text-lg font-semibold tracking-tight">
-          Deepanshi Agarwal
+    <header
+      className={`sticky top-0 z-50 transition-colors duration-300 ${
+        scrolled
+          ? "border-b border-surface-border bg-background/80 backdrop-blur-md"
+          : "border-b border-transparent"
+      }`}
+    >
+      <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
+        <Link
+          href="/"
+          className="shrink-0 font-mono text-xs uppercase tracking-widest text-foreground sm:text-sm"
+        >
+          <span className="sm:hidden">D. Agarwal</span>
+          <span className="hidden sm:inline">Deepanshi Agarwal</span>
         </Link>
-        <ul className="flex gap-6 text-sm">
-          {links.map((link) => (
-            <li key={link.href}>
-              <Link
-                href={link.href}
-                className="text-black/70 transition-colors hover:text-black dark:text-white/70 dark:hover:text-white"
-              >
-                {link.label}
-              </Link>
-            </li>
-          ))}
+        <ul className="flex gap-4 text-xs sm:gap-8 sm:text-sm">
+          {links.map((link) => {
+            const active = pathname === link.href;
+            return (
+              <li key={link.href} className="relative">
+                <Link
+                  href={link.href}
+                  className={`transition-colors ${
+                    active ? "text-accent" : "text-muted hover:text-foreground"
+                  }`}
+                >
+                  {link.label}
+                </Link>
+                {active && (
+                  <span className="absolute -bottom-1.5 left-0 h-px w-full bg-accent" />
+                )}
+              </li>
+            );
+          })}
         </ul>
       </nav>
     </header>

@@ -44,7 +44,7 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
 
   if (status === "sent") {
     return (
-      <p className="rounded-lg bg-green-50 p-4 text-sm text-green-800 dark:bg-green-900/30 dark:text-green-300">
+      <p className="rounded-lg border border-accent/30 bg-accent/10 p-4 text-sm text-accent">
         Thanks — your message has been sent. I will get back to you soon.
       </p>
     );
@@ -61,7 +61,8 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="name"
           type="text"
           required
-          className="w-full rounded-lg border border-black/15 px-3 py-2 text-sm outline-none focus:border-black/40 dark:border-white/15 dark:bg-transparent dark:focus:border-white/40"
+          data-cursor-hover
+          className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
       <div>
@@ -73,7 +74,8 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="email"
           type="email"
           required
-          className="w-full rounded-lg border border-black/15 px-3 py-2 text-sm outline-none focus:border-black/40 dark:border-white/15 dark:bg-transparent dark:focus:border-white/40"
+          data-cursor-hover
+          className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
       <div>
@@ -85,18 +87,20 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="message"
           rows={4}
           required
-          className="w-full rounded-lg border border-black/15 px-3 py-2 text-sm outline-none focus:border-black/40 dark:border-white/15 dark:bg-transparent dark:focus:border-white/40"
+          data-cursor-hover
+          className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
       <button
         type="submit"
         disabled={status === "sending"}
-        className="self-start rounded-lg bg-black px-4 py-2 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:opacity-50 dark:bg-white dark:text-black"
+        data-cursor-hover
+        className="self-start rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === "sending" ? "Sending..." : "Send"}
       </button>
       {status === "error" && (
-        <p className="text-sm text-red-600 dark:text-red-400">
+        <p className="text-sm text-red-400">
           {errorMessage || "Failed to send. Please try again."}
         </p>
       )}

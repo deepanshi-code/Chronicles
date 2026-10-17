@@ -8,13 +8,18 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-xl px-6 py-16">
+    <div className="mx-auto max-w-xl px-6 py-24">
       <Reveal>
-        <h1 className="text-3xl font-bold tracking-tight">Contact</h1>
-        <p className="mt-2 text-black/70 dark:text-white/70">
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          03 — Contact
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+          Contact
+        </h1>
+        <p className="mt-4 text-muted">
           Have a question or want to collaborate? Send a message below.
         </p>
-        <div className="mt-8">
+        <div className="mt-10">
           <ContactForm />
         </div>
       </Reveal>

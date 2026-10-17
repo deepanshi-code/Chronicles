@@ -12,7 +12,7 @@ export default function Footer() {
   }, []);
 
   return (
-    <footer className="border-t border-black/10 py-8 text-center text-sm text-black/60 dark:border-white/10 dark:text-white/60">
+    <footer className="border-t border-surface-border py-8 text-center font-mono text-xs text-muted">
       <p>© {year} Deepanshi Agarwal. Built with Next.js.</p>
     </footer>
   );

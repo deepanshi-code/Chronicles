@@ -27,27 +27,22 @@ export default async function ProjectDetailPage({ params }: Props) {
   if (!project) notFound();
 
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <h1 className="text-3xl font-bold tracking-tight">{project.title}</h1>
-        <div className="mt-3 flex flex-wrap gap-2">
-          {project.techStack.map((tech) => (
-            <span
-              key={tech}
-              className="rounded-full bg-black/5 px-2.5 py-1 text-xs text-black/70 dark:bg-white/10 dark:text-white/70"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
+          {project.title}
+        </h1>
+        <p className="mt-3 font-mono text-xs text-muted">
+          {project.techStack.join("  ·  ")}
+        </p>
 
-        <div className="mt-6 flex gap-4 text-sm font-medium">
+        <div className="mt-8 flex gap-4 text-sm font-medium">
           <a
             href={project.repoUrl}
             target="_blank"
             rel="noopener noreferrer"
             data-cursor-hover
-            className="rounded-lg border border-black/15 px-4 py-2 transition-transform hover:scale-105 dark:border-white/15"
+            className="rounded-full border border-surface-border px-5 py-2.5 transition-colors hover:border-accent hover:text-accent"
           >
             View Repo
           </a>
@@ -57,24 +52,24 @@ export default async function ProjectDetailPage({ params }: Props) {
               target="_blank"
               rel="noopener noreferrer"
               data-cursor-hover
-              className="rounded-lg bg-black px-4 py-2 text-white transition-transform hover:scale-105 dark:bg-white dark:text-black"
+              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink transition-transform hover:scale-105"
             >
               Live Demo
             </a>
           )}
         </div>
 
-        <p className="mt-8 whitespace-pre-line leading-relaxed text-black/80 dark:text-white/80">
+        <p className="mt-10 whitespace-pre-line leading-relaxed text-muted">
           {project.description}
         </p>
       </Reveal>
 
       <Reveal delay={0.1}>
-        <section className="mt-16 border-t border-black/10 pt-10 dark:border-white/10">
+        <section className="mt-16 border-t border-surface-border pt-10">
           <h2 className="text-lg font-semibold">
             Have a question about this project?
           </h2>
-          <p className="mt-1 text-sm text-black/70 dark:text-white/70">
+          <p className="mt-1 text-sm text-muted">
             Send a query directly and I&apos;ll get back to you.
           </p>
           <div className="mt-6 max-w-md">

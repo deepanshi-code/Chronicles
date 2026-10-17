@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import ProjectCard from "@/components/ProjectCard";
+import ProjectRow from "@/components/ProjectRow";
 import Reveal from "@/components/Reveal";
 import { projects } from "@/data/projects";
 
@@ -9,17 +9,23 @@ export const metadata: Metadata = {
 
 export default function ProjectsPage() {
   return (
-    <div className="mx-auto max-w-5xl px-6 py-16">
+    <div className="mx-auto max-w-5xl px-6 py-24">
       <Reveal>
-        <h1 className="text-3xl font-bold tracking-tight">Projects</h1>
-        <p className="mt-2 text-black/70 dark:text-white/70">
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          Index
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+          Projects
+        </h1>
+        <p className="mt-4 max-w-md text-muted">
           Everything I&apos;ve built, with repos and live demos.
         </p>
       </Reveal>
-      <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+
+      <div className="mt-14 border-t border-surface-border">
         {projects.map((project, i) => (
-          <Reveal key={project.slug} delay={(i % 3) * 0.1}>
-            <ProjectCard project={project} />
+          <Reveal key={project.slug} delay={Math.min(i * 0.05, 0.3)}>
+            <ProjectRow project={project} index={i + 1} />
           </Reveal>
         ))}
       </div>

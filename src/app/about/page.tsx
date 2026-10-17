@@ -18,10 +18,15 @@ const skills = [
 
 export default function AboutPage() {
   return (
-    <div className="mx-auto max-w-3xl px-6 py-16">
+    <div className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
-        <h1 className="text-3xl font-bold tracking-tight">About</h1>
-        <p className="mt-6 leading-relaxed text-black/80 dark:text-white/80">
+        <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          02 — About
+        </p>
+        <h1 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+          About
+        </h1>
+        <p className="mt-6 leading-relaxed text-muted">
           I&apos;m an AI &amp; ML enthusiast studying B.Tech Computer Science
           Engineering at Graphic Era Deemed University. I like building
           things end to end — from implementing core algorithms (like
@@ -31,13 +36,15 @@ export default function AboutPage() {
       </Reveal>
 
       <Reveal delay={0.1}>
-        <h2 className="mt-10 text-lg font-semibold">Skills</h2>
-        <ul className="mt-3 flex flex-wrap gap-2">
+        <h2 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
+          Skills
+        </h2>
+        <ul className="mt-4 flex flex-wrap gap-2">
           {skills.map((skill) => (
             <li
               key={skill}
               data-cursor-hover
-              className="rounded-full bg-black/5 px-3 py-1 text-sm transition-transform hover:scale-110 dark:bg-white/10"
+              className="rounded-full border border-surface-border px-3 py-1 text-sm transition-colors hover:border-accent hover:text-accent"
             >
               {skill}
             </li>
@@ -46,8 +53,10 @@ export default function AboutPage() {
       </Reveal>
 
       <Reveal delay={0.2}>
-        <h2 className="mt-10 text-lg font-semibold">Education</h2>
-        <p className="mt-3 text-black/80 dark:text-white/80">
+        <h2 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
+          Education
+        </h2>
+        <p className="mt-4 text-foreground">
           B.Tech in Computer Science Engineering, Graphic Era Deemed
           University.
         </p>
