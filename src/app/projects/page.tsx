@@ -24,9 +24,7 @@ export default function ProjectsPage() {
 
       <div className="mt-14 border-t border-surface-border">
         {projects.map((project, i) => (
-          <Reveal key={project.slug} delay={Math.min(i * 0.05, 0.3)}>
-            <ProjectRow project={project} index={i + 1} />
-          </Reveal>
+          <ProjectRow key={project.slug} project={project} index={i + 1} />
         ))}
       </div>
     </div>
