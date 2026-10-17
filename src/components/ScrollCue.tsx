@@ -2,11 +2,12 @@
 
 import { motion } from "framer-motion";
 
-export default function ScrollCue() {
+export default function ScrollCue({ targetId }: { targetId: string }) {
   return (
-    <motion.div
-      aria-hidden
-      className="pointer-events-none absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
+    <motion.a
+      href={`#${targetId}`}
+      data-cursor-hover
+      className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ delay: 1, duration: 0.6 }}
@@ -20,6 +21,6 @@ export default function ScrollCue() {
         style={{ transformOrigin: "top" }}
         transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
       />
-    </motion.div>
+    </motion.a>
   );
 }

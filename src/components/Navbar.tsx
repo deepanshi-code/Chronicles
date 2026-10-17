@@ -4,16 +4,18 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-const links = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/about", label: "About" },
-  { href: "/contact", label: "Contact" },
+const sections = [
+  { id: "home", label: "Home" },
+  { id: "projects", label: "Projects" },
+  { id: "about", label: "About" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const pathname = usePathname();
+  const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
+  const [activeId, setActiveId] = useState("home");
 
   useEffect(() => {
     function handleScroll() {
@@ -23,6 +25,28 @@ export default function Navbar() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isHome) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveId(entry.target.id);
+          }
+        }
+      },
+      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
+    );
+
+    const elements = sections
+      .map((s) => document.getElementById(s.id))
+      .filter((el): el is HTMLElement => el !== null);
+    elements.forEach((el) => observer.observe(el));
+
+    return () => observer.disconnect();
+  }, [isHome]);
 
   return (
     <header
@@ -41,17 +65,18 @@ export default function Navbar() {
           <span className="hidden sm:inline">Deepanshi Agarwal</span>
         </Link>
         <ul className="flex gap-4 text-xs sm:gap-8 sm:text-sm">
-          {links.map((link) => {
-            const active = pathname === link.href;
+          {sections.map((section) => {
+            const href = section.id === "home" ? "/" : `/#${section.id}`;
+            const active = isHome && activeId === section.id;
             return (
-              <li key={link.href} className="relative">
+              <li key={section.id} className="relative">
                 <Link
-                  href={link.href}
+                  href={href}
                   className={`transition-colors ${
                     active ? "text-accent" : "text-muted hover:text-foreground"
                   }`}
                 >
-                  {link.label}
+                  {section.label}
                 </Link>
                 {active && (
                   <span className="absolute -bottom-1.5 left-0 h-px w-full bg-accent" />
