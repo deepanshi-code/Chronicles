@@ -1,36 +1,66 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio
 
-## Getting Started
+Personal portfolio site built with Next.js (App Router), TypeScript, and Tailwind CSS. Lists projects with repo/live-demo links, project detail pages with a per-project query form, an about section, and a general contact form backed by a custom API route.
 
-First, run the development server:
+**Interactive layer:**
+- `src/components/hero/HeroScene.tsx` — 3D distorted-blob hero (React Three Fiber + drei), reacts to pointer position
+- `src/components/CustomCursor.tsx` — custom cursor, enlarges over links/buttons/`[data-cursor-hover]` elements (fine-pointer devices only)
+- `src/components/PageTransition.tsx` — animated route transitions (Framer Motion `AnimatePresence`)
+- `src/components/Reveal.tsx` — scroll-triggered fade/slide-in, used across all pages
+- `src/components/ProjectCard.tsx` — 3D tilt-on-hover project cards with a cursor-following glow
+- `src/components/BackgroundGlow.tsx` — ambient animated gradient blobs behind every page
+
+## Getting started
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Adding a project
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Edit `src/data/projects.ts` and add an entry to the `projects` array:
 
-## Learn More
+```ts
+{
+  slug: "my-project",          // used in the URL: /projects/my-project
+  title: "My Project",
+  summary: "One-line summary shown on the project card.",
+  description: "Longer description shown on the detail page.",
+  techStack: ["Next.js", "Python"],
+  repoUrl: "https://github.com/you/my-project",
+  liveUrl: "https://my-project.vercel.app", // optional
+  featured: true,               // optional: shows it on the home page
+}
+```
 
-To learn more about Next.js, take a look at the following resources:
+No other code changes are needed — the projects list, grid, and detail pages are all generated from this file.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Contact form / email setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The contact form (general `/contact` page and the per-project query form) posts to `src/app/api/contact/route.ts`, which sends an email via [Resend](https://resend.com).
 
-## Deploy on Vercel
+1. Create a free Resend account and API key.
+2. Copy `.env.example` to `.env.local` and fill in:
+   ```
+   RESEND_API_KEY=your_resend_api_key
+   CONTACT_TO_EMAIL=you@example.com
+   ```
+3. Restart the dev server.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Without these variables set, submissions are accepted and logged to the server console instead of emailed — useful for local development.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Note:** Resend's test sender (`onboarding@resend.dev`) only works out of the box for sending to your own verified email. To send to any address, [verify a domain](https://resend.com/domains) in Resend and update the `from` address in `src/app/api/contact/route.ts`.
+
+## Remaining content to fill in
+
+- `src/components/Navbar.tsx` / `Footer.tsx` — replace "Your Name"
+- `src/app/page.tsx` — hero tagline, GitHub link, resume link (add `public/resume.pdf`)
+- `src/app/about/page.tsx` — real bio, skills, education
+- `src/data/projects.ts` — your real projects
+
+## Deployment
+
+Deploy on [Vercel](https://vercel.com/new) (recommended — same company as Next.js, zero-config). Add the `RESEND_API_KEY` and `CONTACT_TO_EMAIL` environment variables in the Vercel project settings.
