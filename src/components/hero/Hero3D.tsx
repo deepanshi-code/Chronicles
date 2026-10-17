@@ -11,10 +11,7 @@ const HeroScene = dynamic(() => import("./HeroScene"), {
 
 export default function Hero3D() {
   return (
-    <div
-      className="aspect-square w-full max-w-lg touch-none"
-      data-cursor-hover
-    >
+    <div className="aspect-square w-full max-w-lg touch-none">
       <HeroScene />
     </div>
   );

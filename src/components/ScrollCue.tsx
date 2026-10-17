@@ -6,7 +6,6 @@ export default function ScrollCue({ targetId }: { targetId: string }) {
   return (
     <motion.a
       href={`#${targetId}`}
-      data-cursor-hover
       className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 sm:flex"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}

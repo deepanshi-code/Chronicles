@@ -40,14 +40,12 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4 text-sm font-medium">
             <a
               href="#projects"
-              data-cursor-hover
               className="rounded-full bg-accent px-5 py-2.5 text-accent-ink transition-transform hover:scale-105"
             >
               View Projects
             </a>
             <a
               href="/resume.pdf"
-              data-cursor-hover
               className="rounded-full border border-surface-border px-5 py-2.5 transition-colors hover:border-accent hover:text-accent"
             >
               Resume
@@ -56,7 +54,6 @@ export default function Home() {
               href="https://github.com/deepanshi-code"
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor-hover
               className="rounded-full border border-surface-border px-5 py-2.5 transition-colors hover:border-accent hover:text-accent"
             >
               GitHub
@@ -120,7 +117,6 @@ export default function Home() {
             {skills.map((skill) => (
               <li
                 key={skill}
-                data-cursor-hover
                 className="rounded-full border border-surface-border px-3 py-1 text-sm transition-colors hover:border-accent hover:text-accent"
               >
                 {skill}

@@ -41,7 +41,6 @@ export default async function ProjectDetailPage({ params }: Props) {
             href={project.repoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            data-cursor-hover
             className="rounded-full border border-surface-border px-5 py-2.5 transition-colors hover:border-accent hover:text-accent"
           >
             View Repo
@@ -51,7 +50,6 @@ export default async function ProjectDetailPage({ params }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              data-cursor-hover
               className="rounded-full bg-accent px-5 py-2.5 text-accent-ink transition-transform hover:scale-105"
             >
               Live Demo

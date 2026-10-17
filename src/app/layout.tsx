@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import CustomCursor from "@/components/CustomCursor";
 import BackgroundGlow from "@/components/BackgroundGlow";
 import GrainOverlay from "@/components/GrainOverlay";
 import PageTransition from "@/components/PageTransition";
@@ -29,10 +28,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col bg-background text-foreground [@media(pointer:fine)]:cursor-none">
+      <body className="min-h-full flex flex-col bg-background text-foreground">
         <BackgroundGlow />
         <GrainOverlay />
-        <CustomCursor />
         <Navbar />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>

@@ -26,8 +26,6 @@ export default function ProjectRow({
     <motion.div ref={ref} style={{ opacity, scale, y }}>
       <Link
         href={`/projects/${project.slug}`}
-        data-cursor-hover
-        data-cursor-label="View"
         className="group relative block"
       >
         <motion.div

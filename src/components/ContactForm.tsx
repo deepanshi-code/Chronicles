@@ -61,7 +61,6 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="name"
           type="text"
           required
-          data-cursor-hover
           className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
@@ -74,7 +73,6 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="email"
           type="email"
           required
-          data-cursor-hover
           className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
@@ -87,14 +85,12 @@ export default function ContactForm({ projectSlug }: { projectSlug?: string }) {
           name="message"
           rows={4}
           required
-          data-cursor-hover
           className="w-full rounded-lg border border-surface-border bg-transparent px-3 py-2 text-sm outline-none focus:border-accent"
         />
       </div>
       <button
         type="submit"
         disabled={status === "sending"}
-        data-cursor-hover
         className="self-start rounded-full bg-accent px-5 py-2.5 text-sm font-medium text-accent-ink transition-opacity hover:opacity-90 disabled:opacity-50"
       >
         {status === "sending" ? "Sending..." : "Send"}
