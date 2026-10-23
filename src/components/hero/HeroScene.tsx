@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useMemo, useRef } from "react";
+import { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import {
   Environment,
@@ -14,23 +14,26 @@ import {
 import type { Group, Mesh } from "three";
 
 const ACCENT = "#c6ff3d";
+const PARTICLE_COUNT = 400;
+
+function createParticlePositions(count: number) {
+  const arr = new Float32Array(count * 3);
+  for (let i = 0; i < count; i++) {
+    const radius = 3.2 + Math.random() * 2.2;
+    const theta = Math.random() * Math.PI * 2;
+    const phi = Math.acos(Math.random() * 2 - 1);
+    arr[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+    arr[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
+    arr[i * 3 + 2] = radius * Math.cos(phi);
+  }
+  return arr;
+}
+
+// Computed once when this client-only module loads, not during render.
+const PARTICLE_POSITIONS = createParticlePositions(PARTICLE_COUNT);
 
 function ParticleField() {
   const pointsRef = useRef<Group>(null);
-
-  const positions = useMemo(() => {
-    const count = 400;
-    const arr = new Float32Array(count * 3);
-    for (let i = 0; i < count; i++) {
-      const radius = 3.2 + Math.random() * 2.2;
-      const theta = Math.random() * Math.PI * 2;
-      const phi = Math.acos(Math.random() * 2 - 1);
-      arr[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
-      arr[i * 3 + 1] = radius * Math.sin(phi) * Math.sin(theta);
-      arr[i * 3 + 2] = radius * Math.cos(phi);
-    }
-    return arr;
-  }, []);
 
   useFrame((state) => {
     if (!pointsRef.current) return;
@@ -39,7 +42,7 @@ function ParticleField() {
 
   return (
     <group ref={pointsRef}>
-      <Points positions={positions} stride={3} frustumCulled>
+      <Points positions={PARTICLE_POSITIONS} stride={3} frustumCulled>
         <PointMaterial
           transparent
           color={ACCENT}

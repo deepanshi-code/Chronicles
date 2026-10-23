@@ -19,7 +19,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Deepanshi Agarwal — Portfolio",
-  description: "Projects, about, and contact — built with Next.js.",
+  description:
+    "AI & ML enthusiast and B.Tech CSE student building full-stack and machine learning projects. Explore my projects, skills, and get in touch.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
