@@ -49,3 +49,41 @@ body {
   background-clip: text;
   color: transparent;
 }
+
+.glow-blob {
+  will-change: transform;
+}
+
+@keyframes glow-drift-a {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(60px, 40px, 0);
+  }
+}
+
+@keyframes glow-drift-b {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(-50px, 60px, 0);
+  }
+}
+
+.glow-blob-a {
+  animation: glow-drift-a 18s ease-in-out infinite;
+}
+
+.glow-blob-b {
+  animation: glow-drift-b 22s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glow-blob {
+    animation: none;
+  }
+}

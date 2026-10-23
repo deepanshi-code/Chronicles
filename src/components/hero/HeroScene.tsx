@@ -81,6 +81,8 @@ function GlassKnot() {
           distortionScale={0.3}
           temporalDistortion={0.1}
           clearcoat={1}
+          resolution={256}
+          samples={2}
         />
       </mesh>
     </Float>
@@ -112,12 +114,13 @@ function AccentShard({
   );
 }
 
-export default function HeroScene() {
+export default function HeroScene({ active = true }: { active?: boolean }) {
   return (
     <Canvas
       camera={{ position: [0, 0, 5.2], fov: 42 }}
-      dpr={[1, 1.5]}
+      dpr={1}
       gl={{ antialias: true, alpha: true }}
+      frameloop={active ? "always" : "never"}
     >
       <color attach="background" args={[0, 0, 0]} />
       <ambientLight intensity={0.5} />

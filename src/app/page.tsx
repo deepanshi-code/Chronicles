@@ -5,16 +5,25 @@ import Reveal from "@/components/Reveal";
 import ScrollCue from "@/components/ScrollCue";
 import { projects } from "@/data/projects";
 
-const skills = [
-  "Python",
-  "JavaScript",
-  "React",
-  "Node.js / Express",
-  "C / C++",
-  "MongoDB",
-  "Machine Learning",
-  "Data Analysis",
+type SkillEntry = { name: string; match: string[] };
+
+const skillEntries: SkillEntry[] = [
+  { name: "Python", match: ["Python"] },
+  { name: "JavaScript", match: ["JavaScript"] },
+  { name: "React", match: ["React 19"] },
+  { name: "Node.js / Express", match: ["Node.js", "Express", "Express 5"] },
+  { name: "C / C++", match: ["C++", "C"] },
+  { name: "MongoDB", match: ["MongoDB"] },
+  { name: "Machine Learning", match: ["Gemini API"] },
+  { name: "Data Analysis", match: [] },
 ];
+
+function projectsForSkill(skill: SkillEntry) {
+  if (skill.match.length === 0) return [];
+  return projects.filter((p) =>
+    p.techStack.some((tech) => skill.match.includes(tech)),
+  );
+}
 
 export default function Home() {
   return (
@@ -24,7 +33,14 @@ export default function Home() {
         className="relative mx-auto grid max-w-5xl scroll-mt-20 items-center gap-10 px-6 py-16 sm:min-h-[calc(100vh-74px)] sm:grid-cols-2"
       >
         <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+          <span className="inline-flex items-center gap-2 rounded-full border border-surface-border px-3 py-1 font-mono text-xs text-muted">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-accent" />
+            </span>
+            Open to AI / ML internships
+          </span>
+          <p className="mt-6 font-mono text-xs uppercase tracking-[0.3em] text-accent">
             Portfolio / 2026
           </p>
           <h1 className="mt-4 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
@@ -111,18 +127,40 @@ export default function Home() {
 
         <Reveal delay={0.1}>
           <h3 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Skills
+            Skills — where I&apos;ve used them
           </h3>
-          <ul className="mt-4 flex flex-wrap gap-2">
-            {skills.map((skill) => (
-              <li
-                key={skill}
-                className="rounded-full border border-surface-border px-3 py-1 text-sm transition-colors hover:border-accent hover:text-accent"
-              >
-                {skill}
-              </li>
-            ))}
-          </ul>
+          <div className="mt-4 divide-y divide-surface-border border-y border-surface-border">
+            {skillEntries.map((skill) => {
+              const used = projectsForSkill(skill);
+              return (
+                <div
+                  key={skill.name}
+                  className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-6"
+                >
+                  <span className="w-44 shrink-0 text-sm font-medium">
+                    {skill.name}
+                  </span>
+                  {used.length > 0 ? (
+                    <div className="flex flex-wrap gap-2">
+                      {used.map((project) => (
+                        <a
+                          key={project.slug}
+                          href={`/projects/${project.slug}`}
+                          className="rounded-full border border-surface-border px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+                        >
+                          {project.title}
+                        </a>
+                      ))}
+                    </div>
+                  ) : (
+                    <span className="text-xs text-muted">
+                      Coursework &amp; practice
+                    </span>
+                  )}
+                </div>
+              );
+            })}
+          </div>
         </Reveal>
 
         <Reveal delay={0.2}>
@@ -145,10 +183,12 @@ export default function Home() {
             03 — Contact
           </p>
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            Contact
+            Let&apos;s build something.
           </h2>
           <p className="mt-4 text-muted">
-            Have a question or want to collaborate? Send a message below.
+            Open to AI/ML and software engineering internships, or just a
+            good conversation about what you&apos;re building. Send a
+            message below.
           </p>
           <div className="mt-10">
             <ContactForm />
