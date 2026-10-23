@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useRef } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
@@ -19,42 +20,70 @@ export default function ProjectRow({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3]);
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.94, 1, 1, 0.94]);
-  const y = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [24, 0, 0, -24]);
+  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.96, 1, 1, 0.96]);
 
   return (
-    <motion.div ref={ref} style={{ opacity, scale, y }}>
-      <Link
-        href={`/projects/${project.slug}`}
-        className="group relative block"
-      >
-        <motion.div
-          className="absolute inset-y-0 left-0 w-0 bg-accent/5"
-          initial={false}
-          whileHover={{ width: "100%" }}
-          transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
-        />
-        <div className="relative flex flex-col gap-3 border-b border-surface-border py-8 transition-colors sm:flex-row sm:items-center sm:gap-8 sm:py-10">
-          <span className="font-mono text-sm text-muted">
+    <motion.div
+      ref={ref}
+      style={{ opacity, scale }}
+      className="group overflow-hidden rounded-2xl border border-surface-border bg-surface transition-colors hover:border-accent/40"
+    >
+      <Link href={`/projects/${project.slug}`} className="block">
+        <div className="relative aspect-video overflow-hidden border-b border-surface-border bg-background">
+          {project.image && (
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover transition-transform duration-500 group-hover:scale-105"
+            />
+          )}
+          <span className="absolute left-3 top-3 rounded-full bg-background/80 px-2.5 py-1 font-mono text-xs text-muted backdrop-blur-sm">
             {String(index).padStart(2, "0")}
           </span>
-          <div className="flex-1">
-            <h3 className="text-2xl font-semibold tracking-tight transition-colors group-hover:text-accent sm:text-3xl">
-              {project.title}
-            </h3>
-            <p className="mt-2 max-w-xl text-sm text-muted">
-              {project.summary}
-            </p>
-            <p className="mt-3 font-mono text-xs text-muted">
-              {project.techStack.join("  ·  ")}
-            </p>
-          </div>
-          <div className="flex items-center gap-2 text-sm text-muted transition-transform group-hover:translate-x-1 group-hover:text-accent">
-            View project
-            <span aria-hidden>→</span>
-          </div>
+          {project.featured && (
+            <span className="absolute right-3 top-3 rounded-full border border-accent/40 bg-background/80 px-2.5 py-1 text-xs font-medium text-accent backdrop-blur-sm">
+              Flagship
+            </span>
+          )}
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-accent">
+            {project.title}
+          </h3>
+          <p className="mt-2 text-sm text-muted">{project.summary}</p>
+          <p className="mt-3 font-mono text-xs text-muted">
+            {project.techStack.join("  ·  ")}
+          </p>
         </div>
       </Link>
+      <div className="flex items-center gap-4 px-6 pb-6 text-sm">
+        <Link
+          href={`/projects/${project.slug}`}
+          className="font-medium text-accent underline-offset-4 hover:underline"
+        >
+          Details
+        </Link>
+        <a
+          href={project.repoUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted hover:text-foreground"
+        >
+          Repo
+        </a>
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-muted hover:text-foreground"
+          >
+            Live demo
+          </a>
+        )}
+      </div>
     </motion.div>
   );
 }

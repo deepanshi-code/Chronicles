@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0e0e13" />
+  <g stroke="#c6ff3d" stroke-width="3" fill="none" opacity="0.9">
+    <rect x="300" y="155" width="200" height="140" rx="10" />
+    <path d="M300 165 L400 250 L500 165" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+  <g stroke="#c6ff3d" stroke-width="3" opacity="0.6">
+    <path d="M540 190 h40 M540 215 h40 M540 240 h30" stroke-linecap="round" />
+    <path d="M220 190 h40 M220 215 h40 M220 240 h30" stroke-linecap="round" />
+  </g>
+  <text x="400" y="380" text-anchor="middle" font-family="monospace" font-size="18" fill="#9a988f" letter-spacing="2">EMAIL CLASSIFICATION · PYTHON</text>
+</svg>

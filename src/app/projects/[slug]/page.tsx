@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
@@ -29,6 +30,18 @@ export default async function ProjectDetailPage({ params }: Props) {
   return (
     <div className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
+        {project.image && (
+          <div className="relative mb-10 aspect-video overflow-hidden rounded-2xl border border-surface-border bg-surface">
+            <Image
+              src={project.image}
+              alt={`${project.title} preview`}
+              fill
+              sizes="(min-width: 1024px) 768px, 100vw"
+              className="object-cover"
+              priority
+            />
+          </div>
+        )}
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
           {project.title}
         </h1>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450">
+  <rect width="800" height="450" fill="#0e0e13" />
+  <g stroke="#c6ff3d" stroke-width="3" fill="none" opacity="0.9">
+    <rect x="325" y="110" width="150" height="230" rx="10" />
+    <line x1="325" y1="165" x2="475" y2="165" />
+    <circle cx="353" cy="200" r="7" />
+    <circle cx="400" cy="200" r="7" />
+    <circle cx="447" cy="200" r="7" />
+    <circle cx="353" cy="235" r="7" />
+    <circle cx="400" cy="235" r="7" />
+    <circle cx="447" cy="235" r="7" />
+    <circle cx="353" cy="270" r="7" />
+    <circle cx="400" cy="270" r="7" />
+    <circle cx="447" cy="270" r="7" />
+    <rect x="340" y="295" width="120" height="25" rx="6" />
+  </g>
+  <text x="400" y="380" text-anchor="middle" font-family="monospace" font-size="18" fill="#9a988f" letter-spacing="2">SCIENTIFIC TOOLKIT · JAVASCRIPT</text>
+</svg>

@@ -98,7 +98,7 @@ export default function Home() {
             Everything I&apos;ve built, with repos and live demos.
           </p>
         </Reveal>
-        <div className="mt-14 border-t border-surface-border">
+        <div className="mt-14 grid gap-6 sm:grid-cols-2">
           {projects.map((project, i) => (
             <ProjectRow key={project.slug} project={project} index={i + 1} />
           ))}
@@ -123,6 +123,25 @@ export default function Home() {
             (like Huffman coding from scratch) to shipping full-stack apps
             with AI features and real deployments. Learning by building.
           </p>
+
+          <dl className="mt-8 divide-y divide-surface-border rounded-2xl border border-surface-border bg-surface px-5">
+            {[
+              ["Focus", "Full-stack web apps & applied AI/ML"],
+              ["Primary stack", "Python · JavaScript · React · Node.js"],
+              ["Education", "Graphic Era Deemed University, B.Tech CSE"],
+              ["Status", "Open to AI/ML internships"],
+            ].map(([label, value]) => (
+              <div
+                key={label}
+                className="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:gap-6"
+              >
+                <dt className="w-36 shrink-0 font-mono text-xs uppercase tracking-wider text-muted">
+                  {label}
+                </dt>
+                <dd className="text-sm text-foreground">{value}</dd>
+              </div>
+            ))}
+          </dl>
         </Reveal>
 
         <Reveal delay={0.1}>
@@ -165,12 +184,26 @@ export default function Home() {
 
         <Reveal delay={0.2}>
           <h3 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Education
+            Timeline
           </h3>
-          <p className="mt-4 text-foreground">
-            B.Tech in Computer Science Engineering, Graphic Era Deemed
-            University.
-          </p>
+          <div className="mt-4 space-y-6 border-l border-surface-border pl-6">
+            <div className="relative">
+              <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full bg-accent" />
+              <p className="font-mono text-xs text-muted">Now</p>
+              <p className="mt-1 text-sm text-foreground">
+                B.Tech CSE, Graphic Era Deemed University — building
+                full-stack and AI/ML projects alongside coursework.
+              </p>
+            </div>
+            <div className="relative">
+              <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full border border-muted" />
+              <p className="font-mono text-xs text-muted">Next</p>
+              <p className="mt-1 text-sm text-foreground">
+                Looking for an AI/ML or software engineering internship to
+                ship features to real users.
+              </p>
+            </div>
+          </div>
         </Reveal>
       </section>
 
