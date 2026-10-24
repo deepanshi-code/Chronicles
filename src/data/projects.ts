@@ -40,7 +40,7 @@ export const projects: Project[] = [
       "ShrinkByte implements lossless file compression using Huffman coding, built as a practical application of Data Structures (frequency tables, min-heaps, binary trees) in C/C++, with a Node.js/Express layer and a simple web UI on top. It compresses suitable files, decompresses them, and verifies the recovered file is byte-for-byte identical to the original — the goal was understanding the compression process from first principles rather than using an existing library.",
     techStack: ["C++", "C", "Node.js", "Express", "JavaScript"],
     repoUrl: "https://github.com/deepanshi-code/ShrinkByte",
-    image: "/project-images/shrinkbyte.svg",
+    image: "/project-images/shrinkbyte.jpg",
   },
   {
     slug: "orbit",
@@ -63,7 +63,7 @@ export const projects: Project[] = [
       "Calcora bundles a scientific calculator, function plotter, calculus tools, unit and currency converters, a BMI calculator, and a searchable formula library into a single dependency-free, offline-capable (PWA) web app. It's validated with a dedicated test suite plus an accuracy benchmark checked against an independent Python reference implementation, and a mutation-testing script that plants known bugs to prove the benchmark can actually catch regressions.",
     techStack: ["JavaScript", "HTML", "CSS", "Service Worker / PWA"],
     repoUrl: "https://github.com/deepanshi-code/CalCora",
-    image: "/project-images/calcora.svg",
+    image: "/project-images/calcora.jpg",
   },
   {
     slug: "ime-email-segregation",
@@ -74,7 +74,7 @@ export const projects: Project[] = [
       "Built for the IME Innovation Challenge under TBI-GEU, this system processes unstructured shipping and chartering emails (vessel availability, voyage charter cargo requests, time charter requirements) and converts them into structured, machine-readable JSON — without calling any external LLM API. It identifies the email category and extracts the relevant business fields using local Python processing, automating a task that otherwise requires manually reading each email.",
     techStack: ["Python"],
     repoUrl: "https://github.com/deepanshi-code/IME_EMIAL_SEGREGATION",
-    image: "/project-images/ime-email-segregation.svg",
+    image: "/project-images/ime-email-segregation.jpg",
   },
   {
     slug: "password-generator",

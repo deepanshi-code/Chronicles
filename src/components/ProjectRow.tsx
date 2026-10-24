@@ -36,7 +36,7 @@ export default function ProjectRow({
               alt={`${project.title} preview`}
               fill
               sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover transition-transform duration-500 group-hover:scale-105"
+              className="object-cover object-top transition-transform duration-500 group-hover:scale-105"
             />
           )}
           <span className="absolute left-3 top-3 rounded-full bg-background/80 px-2.5 py-1 font-mono text-xs text-muted backdrop-blur-sm">

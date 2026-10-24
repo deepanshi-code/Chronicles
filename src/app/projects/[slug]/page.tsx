@@ -37,7 +37,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               alt={`${project.title} preview`}
               fill
               sizes="(min-width: 1024px) 768px, 100vw"
-              className="object-cover"
+              className="object-cover object-top"
               priority
             />
           </div>
