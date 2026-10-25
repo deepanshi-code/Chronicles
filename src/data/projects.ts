@@ -32,6 +32,37 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "doon-view",
+    title: "Doon View",
+    summary:
+      "Review intelligence for Uttarakhand hill towns, built for an AI–Tourism Hackathon — team project.",
+    description:
+      "Built with a teammate for the AI–Tourism Hackathon (UNWTO theme: using AI to redesign tourism) — I pair-programmed and co-designed features alongside them. Doon View reads every recent review of every hotel in a hill-station market together and answers: is a complaint specific to one hotel, or shared across the whole town? It estimates which complaint costs a hotel the most star-rating (a linear model of stars on per-aspect complaints) and surfaces destination-level sentiment trends with real guest quotes. Reviews are classified with a fine-tuned DeBERTa-v3 model (English) and Gemini (short or Hindi-English text), with keyword rules as a fallback; a FastAPI backend serves the computed stats to a React frontend with a Three.js ridge-relief background.",
+    techStack: [
+      "React",
+      "Tailwind CSS",
+      "Three.js",
+      "FastAPI",
+      "DeBERTa-v3",
+      "Gemini API",
+    ],
+    repoUrl: "https://github.com/deepanshi-code/doon-view",
+    liveUrl: "https://doon-view.abhinesh.codes",
+    image: "/project-images/doon-view.jpg",
+  },
+  {
+    slug: "bullion-basis",
+    title: "Bullion Basis",
+    summary:
+      "Tests MCX gold futures lot sizes for a tradable pricing gap — built for HackInHills 2026, team project.",
+    description:
+      "Built with Team Blaze for HackInHills 2026 (Track 3: Commodity Derivatives Intelligence) — I pair-programmed and co-designed features alongside my teammate. MCX lists gold futures in four lot sizes (GOLDM, GOLDTEN, GOLDGUINEA, GOLDPETAL); the app normalizes every contract to one price per gram of 999 gold and checks whether the gaps between them are a tradable edge after costs, or just contract differences. It ingests and validates real MCX Bhavcopy data, runs a walk-forward backtest (decide at close, trade next day, expanding training window, costs modeled at 1x/2x/3x) against no-cost and random-entry baselines, and only claims an edge if net Sharpe is positive across every hold-out fold at 2x costs.",
+    techStack: ["React 19", "TypeScript", "Vite", "Tailwind CSS", "GSAP"],
+    repoUrl: "https://github.com/deepanshi-code/Bullion-Basis",
+    liveUrl: "https://bullion-basis.pages.dev",
+    image: "/project-images/bullion-basis.jpg",
+  },
+  {
     slug: "shrinkbyte",
     title: "ShrinkByte",
     summary:
