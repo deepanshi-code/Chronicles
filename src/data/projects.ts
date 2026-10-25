@@ -119,6 +119,17 @@ export const projects: Project[] = [
     liveUrl: "https://deepanshi-code.github.io/Password-Generator/",
     image: "/project-images/password-generator.jpg",
   },
+  {
+    slug: "codealpha-ml-tasks",
+    title: "CodeAlpha ML Tasks",
+    summary:
+      "Two data science exercises from a CodeAlpha internship: credit scoring and disease prediction.",
+    description:
+      "Two small machine learning exercises completed for a CodeAlpha Data Science internship. The first generates a synthetic financial dataset (income, debts, payment history, loan amount, age) and trains a Decision Tree classifier to predict creditworthiness, reaching 98.4% accuracy on the held-out test set. The second generates a synthetic medical dataset (glucose, blood pressure, BMI, age, insulin) and trains a Logistic Regression model to predict a disease outcome. Both notebooks cover the full workflow: data generation, a train/test split, model training, and evaluation with a classification report and confusion matrix.",
+    techStack: ["Python", "scikit-learn", "pandas", "Jupyter Notebook"],
+    repoUrl: "https://github.com/deepanshi-code/CodeAlpha_project",
+    image: "/project-images/codealpha-ml-tasks.svg",
+  },
 ];
 
 export function getProjectBySlug(slug: string): Project | undefined {
