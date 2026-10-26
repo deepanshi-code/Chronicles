@@ -68,6 +68,18 @@ export const projects: Project[] = [
     image: "/project-images/calcora.jpg",
   },
   {
+    slug: "uttarakhand-aipan-art",
+    title: "Uttarakhand Aipan Art",
+    summary:
+      "Two e-commerce-style static sites for women-led Aipan folk-art businesses from Kumaon, Uttarakhand.",
+    description:
+      "A student project: two static websites for women-led Aipan folk-art businesses from the Kumaon hills of Uttarakhand — Devbhoomi Aipan Art (traditional ritual pieces: chowkis, wall art, puja decor) and Kumaon Aipan Art (modern lifestyle products: coasters, stoles, gift sets). Each site has Home, About, Products, Gallery, and Contact pages with a JSON-driven product catalog and a WhatsApp inquiry flow, built with Eleventy so the header, footer, product popup, and product card are each defined once and shared across both sites rather than duplicated. Deploys automatically to GitHub Pages via GitHub Actions on every push. It's explicitly labeled as a demo: product photos, prices, and contact details are placeholder sample content, not a live business.",
+    techStack: ["HTML", "CSS", "JavaScript", "Eleventy", "GitHub Actions"],
+    repoUrl: "https://github.com/deepanshi-code/Uttarakhand-Aipan-Art",
+    liveUrl: "https://deepanshi-code.github.io/Uttarakhand-Aipan-Art/",
+    image: "/project-images/aipan-art.jpg",
+  },
+  {
     slug: "doon-view",
     title: "Doon View",
     summary:
