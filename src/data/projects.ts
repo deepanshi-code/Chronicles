@@ -108,27 +108,16 @@ export const projects: Project[] = [
     image: "/project-images/ime-email-segregation.jpg",
   },
   {
-    slug: "password-generator",
-    title: "Password Generator",
+    slug: "keyforge",
+    title: "KeyForge",
     summary:
-      "A customizable secure password generator with a glassmorphism UI.",
+      "On-device identity toolkit: usernames, project/team names, personas, and encrypted passwords.",
     description:
-      "A small front-end tool for generating secure random passwords with configurable length and character sets (uppercase, lowercase, numbers, symbols), a strength indicator, and one-click copy to clipboard, styled with a glassmorphism UI.",
-    techStack: ["HTML", "CSS", "JavaScript"],
-    repoUrl: "https://github.com/deepanshi-code/Password-Generator",
-    liveUrl: "https://deepanshi-code.github.io/Password-Generator/",
-    image: "/project-images/password-generator.jpg",
-  },
-  {
-    slug: "codealpha-ml-tasks",
-    title: "CodeAlpha ML Tasks",
-    summary:
-      "Two data science exercises from a CodeAlpha internship: credit scoring and disease prediction.",
-    description:
-      "Two small machine learning exercises completed for a CodeAlpha Data Science internship. The first generates a synthetic financial dataset (income, debts, payment history, loan amount, age) and trains a Decision Tree classifier to predict creditworthiness, reaching 98.4% accuracy on the held-out test set. The second generates a synthetic medical dataset (glucose, blood pressure, BMI, age, insulin) and trains a Logistic Regression model to predict a disease outcome. Both notebooks cover the full workflow: data generation, a train/test split, model training, and evaluation with a classification report and confusion matrix.",
-    techStack: ["Python", "scikit-learn", "pandas", "Jupyter Notebook"],
-    repoUrl: "https://github.com/deepanshi-code/CodeAlpha_project",
-    image: "/project-images/codealpha-ml-tasks.svg",
+      "KeyForge generates usernames, project names, team names, full fake personas, and secure passwords — entirely client-side, with no server. It started as a beginner password generator in plain HTML/CSS/JS and was rebuilt as a modular TypeScript app. Starring favorites trains a small on-device character-trigram model that re-ranks future results toward your taste, with 25% of results still drawn randomly so suggestions don't collapse into a bubble; an Insights tab measures whether that actually helps using interleaving (the method search engines use to A/B test rankings) with a 95% confidence interval and a two-proportion z-test, rather than just asserting it works. Saved favorites live in password-protected local profiles: a key is derived with PBKDF2-SHA256 (600,000 rounds) and items are encrypted with AES-256-GCM via the Web Crypto API, with encrypted backup/restore to move a profile between devices. Installable offline as a PWA.",
+    techStack: ["TypeScript", "Web Crypto API", "PWA"],
+    repoUrl: "https://github.com/deepanshi-code/KeyForge",
+    liveUrl: "https://deepanshi-code.github.io/KeyForge/",
+    image: "/project-images/keyforge.jpg",
   },
 ];
 
