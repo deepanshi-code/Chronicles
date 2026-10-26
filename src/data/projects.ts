@@ -108,6 +108,17 @@ export const projects: Project[] = [
     image: "/project-images/ime-email-segregation.jpg",
   },
   {
+    slug: "codealpha-ml-projects",
+    title: "CodeAlpha ML Projects",
+    summary:
+      "Two binary-classification projects for a CodeAlpha ML internship, with baselines and error analysis.",
+    description:
+      "Two binary-classification projects for the CodeAlpha ML internship: credit scoring (is a loan applicant creditworthy?) and disease prediction (does a patient have the disease?). Both follow the same disciplined workflow — problem and metric choice, data checks, EDA, a stratified train/test split, a majority-class baseline, cross-validated model comparison, tuning, held-out test evaluation, and error analysis — rather than just fitting one model and reporting accuracy. On the held-out set, logistic regression reached ROC-AUC 1.000 on credit scoring (the true labeling rule is linear, so it wins over a decision tree), while a Random Forest reached perfect recall on disease prediction, catching every positive case the tuned logistic regression's threshold missed. The datasets are synthetic and generated from explicit hand-written rules (documented in the README), and the write-up is explicit that this makes the scores an artefact of noise-free labels, not a claim about real-world performance — the point of the project is the methodology, not the number.",
+    techStack: ["Python", "scikit-learn", "pandas", "Jupyter Notebook"],
+    repoUrl: "https://github.com/deepanshi-code/CodeAlpha_project",
+    image: "/project-images/codealpha-ml-projects.svg",
+  },
+  {
     slug: "keyforge",
     title: "KeyForge",
     summary:
