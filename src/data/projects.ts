@@ -37,9 +37,10 @@ export const projects: Project[] = [
     summary:
       "Lossless file compression and decompression built from scratch using Huffman coding.",
     description:
-      "ShrinkByte implements lossless file compression using Huffman coding, built as a practical application of Data Structures (frequency tables, min-heaps, binary trees) in C/C++, with a Node.js/Express layer and a simple web UI on top. It compresses suitable files, decompresses them, and verifies the recovered file is byte-for-byte identical to the original — the goal was understanding the compression process from first principles rather than using an existing library.",
+      "ShrinkByte implements lossless file compression using Huffman coding, a practical application of Data Structures (frequency tables, min-heaps, binary trees) originally written in C/C++ and ported to a browser-based implementation that runs entirely client-side via a Web Worker — no file ever leaves your device. It compresses suitable files, decompresses them, and verifies the recovered file is byte-for-byte identical to the original — the goal was understanding the compression process from first principles rather than using an existing library.",
     techStack: ["C++", "C", "Node.js", "Express", "JavaScript"],
     repoUrl: "https://github.com/deepanshi-code/ShrinkByte",
+    liveUrl: "https://deepanshi-code.github.io/ShrinkByte/",
     image: "/project-images/shrinkbyte.jpg",
   },
   {
@@ -63,6 +64,7 @@ export const projects: Project[] = [
       "Calcora bundles a scientific calculator, function plotter, calculus tools, unit and currency converters, a BMI calculator, and a searchable formula library into a single dependency-free, offline-capable (PWA) web app. It's validated with a dedicated test suite plus an accuracy benchmark checked against an independent Python reference implementation, and a mutation-testing script that plants known bugs to prove the benchmark can actually catch regressions.",
     techStack: ["JavaScript", "HTML", "CSS", "Service Worker / PWA"],
     repoUrl: "https://github.com/deepanshi-code/CalCora",
+    liveUrl: "https://deepanshi-code.github.io/CalCora/",
     image: "/project-images/calcora.jpg",
   },
   {
