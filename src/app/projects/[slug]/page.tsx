@@ -68,7 +68,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink shadow-[0_8px_24px_-6px_rgba(198,255,61,0.45)] transition-transform hover:scale-105"
+              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink shadow-[0_8px_24px_-6px_rgba(255,45,110,0.45)] transition-transform hover:scale-105"
             >
               Live Demo
             </a>

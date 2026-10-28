@@ -56,7 +56,7 @@ export default function ProjectRow({
               </h3>
             </div>
             {project.featured && (
-              <span className="shrink-0 rounded-full border border-accent/40 bg-accent/10 px-2.5 py-1 text-xs font-medium text-accent">
+              <span className="shrink-0 rounded-full border border-accent-2/40 bg-accent-2/10 px-2.5 py-1 text-xs font-medium text-accent-2">
                 Flagship
               </span>
             )}

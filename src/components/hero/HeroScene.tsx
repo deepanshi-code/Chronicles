@@ -13,7 +13,8 @@ import {
 } from "@react-three/drei";
 import type { Group, Mesh } from "three";
 
-const ACCENT = "#c6ff3d";
+const ACCENT = "#ff2d6e";
+const ACCENT_2 = "#2aa9ff";
 const PARTICLE_COUNT = 400;
 
 function createParticlePositions(count: number) {
@@ -93,18 +94,20 @@ function AccentShard({
   position,
   scale,
   speed,
+  color = ACCENT,
 }: {
   position: [number, number, number];
   scale: number;
   speed: number;
+  color?: string;
 }) {
   return (
     <Float speed={speed} rotationIntensity={1.1} floatIntensity={1.6}>
       <mesh position={position} scale={scale}>
         <octahedronGeometry args={[1, 0]} />
         <meshStandardMaterial
-          color={ACCENT}
-          emissive={ACCENT}
+          color={color}
+          emissive={color}
           emissiveIntensity={0.4}
           roughness={0.3}
           metalness={0.4}
@@ -126,12 +129,13 @@ export default function HeroScene({ active = true }: { active?: boolean }) {
       <ambientLight intensity={0.5} />
       <directionalLight position={[4, 4, 4]} intensity={1.4} />
       <pointLight position={[-4, -2, -3]} intensity={0.8} color={ACCENT} />
+      <pointLight position={[4, 2, -2]} intensity={0.5} color={ACCENT_2} />
 
       <Suspense fallback={null}>
         <GlassKnot />
-        <AccentShard position={[-2.1, 1.1, -1]} scale={0.18} speed={1.4} />
-        <AccentShard position={[2.2, -0.9, -0.5]} scale={0.14} speed={1.8} />
-        <AccentShard position={[1.6, 1.4, -1.5]} scale={0.1} speed={2.2} />
+        <AccentShard position={[-2.1, 1.1, -1]} scale={0.18} speed={1.4} color={ACCENT} />
+        <AccentShard position={[2.2, -0.9, -0.5]} scale={0.14} speed={1.8} color={ACCENT_2} />
+        <AccentShard position={[1.6, 1.4, -1.5]} scale={0.1} speed={2.2} color={ACCENT} />
         <ParticleField />
         <Environment resolution={256}>
           <group rotation={[0, 0, Math.PI / 3]}>
@@ -151,10 +155,10 @@ export default function HeroScene({ active = true }: { active?: boolean }) {
             />
             <Lightformer
               form="ring"
-              intensity={3}
+              intensity={4}
               position={[3, 2, 2]}
               scale={3}
-              color="#ffffff"
+              color={ACCENT_2}
             />
           </group>
         </Environment>
