@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { useActiveSection } from "@/hooks/useActiveSection";
 
+const sectionIds = ["home", "projects", "about", "contact"];
 const sections = [
   { id: "home", label: "Home" },
   { id: "projects", label: "Projects" },
@@ -15,7 +17,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const isHome = pathname === "/";
   const [scrolled, setScrolled] = useState(false);
-  const [activeId, setActiveId] = useState("home");
+  const activeId = useActiveSection(sectionIds, isHome);
 
   useEffect(() => {
     function handleScroll() {
@@ -26,28 +28,6 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    if (!isHome) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (entry.isIntersecting) {
-            setActiveId(entry.target.id);
-          }
-        }
-      },
-      { rootMargin: "-45% 0px -50% 0px", threshold: 0 },
-    );
-
-    const elements = sections
-      .map((s) => document.getElementById(s.id))
-      .filter((el): el is HTMLElement => el !== null);
-    elements.forEach((el) => observer.observe(el));
-
-    return () => observer.disconnect();
-  }, [isHome]);
-
   return (
     <header
       className={`sticky top-0 z-50 transition-colors duration-300 ${
@@ -57,12 +37,14 @@ export default function Navbar() {
       }`}
     >
       <nav className="mx-auto flex max-w-5xl items-center justify-between gap-4 px-6 py-5">
-        <Link
-          href="/"
-          className="shrink-0 font-mono text-xs uppercase tracking-widest text-foreground sm:text-sm"
-        >
-          <span className="sm:hidden">D. Agarwal</span>
-          <span className="hidden sm:inline">Deepanshi Agarwal</span>
+        <Link href="/" className="group flex shrink-0 items-center gap-2.5">
+          <span className="flex h-7 w-7 items-center justify-center rounded-md bg-accent font-mono text-xs font-bold text-accent-ink transition-transform group-hover:scale-105">
+            D
+          </span>
+          <span className="font-mono text-xs uppercase tracking-widest text-foreground sm:text-sm">
+            <span className="sm:hidden">Agarwal</span>
+            <span className="hidden sm:inline">Deepanshi Agarwal</span>
+          </span>
         </Link>
         <ul className="flex gap-4 text-xs sm:gap-8 sm:text-sm">
           {sections.map((section) => {

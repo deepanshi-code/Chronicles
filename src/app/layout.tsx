@@ -5,6 +5,7 @@ import Footer from "@/components/Footer";
 import BackgroundGlow from "@/components/BackgroundGlow";
 import GrainOverlay from "@/components/GrainOverlay";
 import PageTransition from "@/components/PageTransition";
+import SectionRail from "@/components/SectionRail";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -32,6 +33,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="min-h-full flex flex-col bg-background text-foreground">
         <BackgroundGlow />
         <GrainOverlay />
+        <SectionRail />
         <Navbar />
         <main className="flex-1">
           <PageTransition>{children}</PageTransition>

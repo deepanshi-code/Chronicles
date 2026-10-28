@@ -107,9 +107,9 @@ export default function Home() {
 
       <section
         id="about"
-        className="mx-auto max-w-3xl scroll-mt-20 px-6 py-24"
+        className="mx-auto grid max-w-5xl scroll-mt-20 gap-12 px-6 py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-16"
       >
-        <Reveal>
+        <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
             02 — About
           </p>
@@ -144,89 +144,98 @@ export default function Home() {
           </dl>
         </Reveal>
 
-        <Reveal delay={0.1}>
-          <h3 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Skills — where I&apos;ve used them
-          </h3>
-          <div className="mt-4 divide-y divide-surface-border border-y border-surface-border">
-            {skillEntries.map((skill) => {
-              const used = projectsForSkill(skill);
-              return (
-                <div
-                  key={skill.name}
-                  className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-6"
-                >
-                  <span className="w-44 shrink-0 text-sm font-medium">
-                    {skill.name}
-                  </span>
-                  {used.length > 0 ? (
-                    <div className="flex flex-wrap gap-2">
-                      {used.map((project) => (
-                        <a
-                          key={project.slug}
-                          href={`/projects/${project.slug}`}
-                          className="rounded-full border border-surface-border px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
-                        >
-                          {project.title}
-                        </a>
-                      ))}
-                    </div>
-                  ) : (
-                    <span className="text-xs text-muted">
-                      Coursework &amp; practice
+        <div>
+          <Reveal>
+            <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
+              Skills — where I&apos;ve used them
+            </h3>
+            <div className="mt-4 divide-y divide-surface-border border-y border-surface-border">
+              {skillEntries.map((skill) => {
+                const used = projectsForSkill(skill);
+                return (
+                  <div
+                    key={skill.name}
+                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-6"
+                  >
+                    <span className="w-44 shrink-0 text-sm font-medium">
+                      {skill.name}
                     </span>
-                  )}
-                </div>
-              );
-            })}
-          </div>
-        </Reveal>
+                    {used.length > 0 ? (
+                      <div className="flex flex-wrap gap-2">
+                        {used.map((project) => (
+                          <a
+                            key={project.slug}
+                            href={`/projects/${project.slug}`}
+                            className="rounded-full border border-surface-border px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+                          >
+                            {project.title}
+                          </a>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-xs text-muted">
+                        Coursework &amp; practice
+                      </span>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </Reveal>
 
-        <Reveal delay={0.2}>
-          <h3 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
-            Timeline
-          </h3>
-          <div className="mt-4 space-y-6 border-l border-surface-border pl-6">
-            <div className="relative">
-              <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full bg-accent" />
-              <p className="font-mono text-xs text-muted">Now</p>
-              <p className="mt-1 text-sm text-foreground">
-                B.Tech CSE, Graphic Era Deemed University — building
-                full-stack and AI/ML projects alongside coursework.
-              </p>
+          <Reveal delay={0.1}>
+            <h3 className="mt-14 font-mono text-xs uppercase tracking-[0.3em] text-muted">
+              Timeline
+            </h3>
+            <div className="mt-4 space-y-6 border-l border-surface-border pl-6">
+              <div className="relative">
+                <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full bg-accent" />
+                <p className="font-mono text-xs text-muted">Now</p>
+                <p className="mt-1 text-sm text-foreground">
+                  B.Tech CSE, Graphic Era Deemed University — building
+                  full-stack and AI/ML projects alongside coursework.
+                </p>
+              </div>
+              <div className="relative">
+                <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full border border-muted" />
+                <p className="font-mono text-xs text-muted">Next</p>
+                <p className="mt-1 text-sm text-foreground">
+                  Looking for an AI/ML or software engineering internship to
+                  ship features to real users.
+                </p>
+              </div>
             </div>
-            <div className="relative">
-              <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full border border-muted" />
-              <p className="font-mono text-xs text-muted">Next</p>
-              <p className="mt-1 text-sm text-foreground">
-                Looking for an AI/ML or software engineering internship to
-                ship features to real users.
-              </p>
-            </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        </div>
       </section>
 
       <section
         id="contact"
-        className="mx-auto max-w-xl scroll-mt-20 px-6 py-24"
+        className="relative scroll-mt-20 overflow-hidden border-t border-surface-border px-6 py-32"
       >
-        <Reveal>
-          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-            03 — Contact
-          </p>
-          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
-            Let&apos;s build something.
-          </h2>
-          <p className="mt-4 text-muted">
-            Open to AI/ML and software engineering internships, or just a
-            good conversation about what you&apos;re building. Send a
-            message below.
-          </p>
-          <div className="mt-10">
-            <ContactForm />
-          </div>
-        </Reveal>
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_50%_0%,color-mix(in_srgb,var(--accent)_12%,transparent),transparent_60%)]"
+        />
+        <div className="relative mx-auto max-w-xl text-center">
+          <Reveal>
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+              03 — Contact
+            </p>
+            <h2 className="mt-4 text-5xl font-bold tracking-tight sm:text-6xl">
+              Let&apos;s build
+              <br />
+              something.
+            </h2>
+            <p className="mx-auto mt-5 max-w-sm text-muted">
+              Open to AI/ML and software engineering internships, or just a
+              good conversation about what you&apos;re building.
+            </p>
+            <div className="mt-10 text-left">
+              <ContactForm />
+            </div>
+          </Reveal>
+        </div>
       </section>
     </div>
   );
