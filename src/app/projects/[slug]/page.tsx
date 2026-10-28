@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import BrowserFrame from "@/components/BrowserFrame";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
 import { getProjectBySlug, projects } from "@/data/projects";
@@ -31,15 +32,19 @@ export default async function ProjectDetailPage({ params }: Props) {
     <div className="mx-auto max-w-3xl px-6 py-24">
       <Reveal>
         {project.image && (
-          <div className="relative mb-10 aspect-video overflow-hidden rounded-2xl border border-surface-border bg-surface">
-            <Image
-              src={project.image}
-              alt={`${project.title} preview`}
-              fill
-              sizes="(min-width: 1024px) 768px, 100vw"
-              className="object-cover object-top"
-              priority
-            />
+          <div className="mb-10">
+            <BrowserFrame>
+              <div className="relative aspect-video overflow-hidden bg-background">
+                <Image
+                  src={project.image}
+                  alt={`${project.title} preview`}
+                  fill
+                  sizes="(min-width: 1024px) 768px, 100vw"
+                  className="object-cover object-top"
+                  priority
+                />
+              </div>
+            </BrowserFrame>
           </div>
         )}
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
@@ -63,7 +68,7 @@ export default async function ProjectDetailPage({ params }: Props) {
               href={project.liveUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink transition-transform hover:scale-105"
+              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink shadow-[0_8px_24px_-6px_rgba(198,255,61,0.45)] transition-transform hover:scale-105"
             >
               Live Demo
             </a>

@@ -56,7 +56,7 @@ export default function Home() {
           <div className="mt-8 flex flex-wrap gap-4 text-sm font-medium">
             <a
               href="#projects"
-              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink transition-transform hover:scale-105"
+              className="rounded-full bg-accent px-5 py-2.5 text-accent-ink shadow-[0_8px_24px_-6px_rgba(198,255,61,0.45)] transition-transform hover:scale-105"
             >
               View Projects
             </a>
