@@ -1,4 +1,5 @@
 import ContactForm from "@/components/ContactForm";
+import GlitchText from "@/components/GlitchText";
 import Hero3D from "@/components/hero/Hero3D";
 import ProjectRow from "@/components/ProjectRow";
 import Reveal from "@/components/Reveal";
@@ -44,9 +45,9 @@ export default function Home() {
             Portfolio / 2026
           </p>
           <h1 className="mt-4 text-5xl font-bold leading-[1.05] tracking-tight sm:text-6xl">
-            Deepanshi
+            <GlitchText text="Deepanshi" delay={150} />
             <br />
-            Agarwal
+            <GlitchText text="Agarwal" delay={450} />
           </h1>
           <p className="mt-6 max-w-md text-lg text-muted">
             AI &amp; ML enthusiast and B.Tech CSE student at Graphic Era

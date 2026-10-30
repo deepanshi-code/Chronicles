@@ -104,3 +104,38 @@ body {
     animation: none;
   }
 }
+
+.glitch-text {
+  display: inline-block;
+  font-variant-numeric: tabular-nums;
+}
+
+.glitch-text.is-glitching {
+  animation: glitch-shift 0.12s steps(2, end) infinite;
+  text-shadow:
+    -2px 0 var(--accent),
+    2px 0 var(--accent-2);
+}
+
+@keyframes glitch-shift {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-2px, 1px);
+  }
+  50% {
+    transform: translate(2px, -1px);
+  }
+  75% {
+    transform: translate(-1px, 2px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glitch-text.is-glitching {
+    animation: none;
+    text-shadow: none;
+  }
+}

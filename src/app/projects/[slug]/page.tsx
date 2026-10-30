@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import BrowserFrame from "@/components/BrowserFrame";
 import ContactForm from "@/components/ContactForm";
+import GlitchText from "@/components/GlitchText";
 import Reveal from "@/components/Reveal";
 import { getProjectBySlug, projects } from "@/data/projects";
 
@@ -49,7 +50,7 @@ export default async function ProjectDetailPage({ params }: Props) {
           </div>
         )}
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl">
-          {project.title}
+          <GlitchText text={project.title} />
         </h1>
         <p className="mt-3 font-mono text-xs text-muted">
           {project.techStack.join("  ·  ")}
