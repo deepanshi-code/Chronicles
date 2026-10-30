@@ -189,11 +189,22 @@ export default function Home() {
             </h3>
             <div className="mt-4 space-y-6 border-l border-surface-border pl-6">
               <div className="relative">
+                <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full border border-muted" />
+                <p className="font-mono text-xs text-muted">Jul 2026</p>
+                <p className="mt-1 text-sm text-foreground">
+                  Two internships: AI-Assisted Full Stack Web Development
+                  Intern at the Technology Business Incubator, Graphic Era
+                  University, and Machine Learning Intern at CodeAlpha
+                  (remote).
+                </p>
+              </div>
+              <div className="relative">
                 <span className="absolute -left-[1.6rem] top-1.5 h-2 w-2 rounded-full bg-accent" />
                 <p className="font-mono text-xs text-muted">Now</p>
                 <p className="mt-1 text-sm text-foreground">
-                  B.Tech CSE, Graphic Era Deemed University — building
-                  full-stack and AI/ML projects alongside coursework.
+                  B.Tech CSE (AI &amp; ML), Graphic Era Deemed University —
+                  building full-stack and AI/ML projects alongside
+                  coursework.
                 </p>
               </div>
               <div className="relative">

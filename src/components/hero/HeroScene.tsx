@@ -90,6 +90,36 @@ function GlassKnot() {
   );
 }
 
+function OrbitRing({
+  radius,
+  tilt,
+  speed,
+  color,
+}: {
+  radius: number;
+  tilt: [number, number, number];
+  speed: number;
+  color: string;
+}) {
+  const ref = useRef<Group>(null);
+
+  useFrame((_, delta) => {
+    if (!ref.current) return;
+    ref.current.rotation.z += delta * speed;
+  });
+
+  return (
+    <group rotation={tilt}>
+      <group ref={ref}>
+        <mesh>
+          <torusGeometry args={[radius, 0.012, 16, 128]} />
+          <meshBasicMaterial color={color} transparent opacity={0.5} />
+        </mesh>
+      </group>
+    </group>
+  );
+}
+
 function AccentShard({
   position,
   scale,
@@ -133,6 +163,8 @@ export default function HeroScene({ active = true }: { active?: boolean }) {
 
       <Suspense fallback={null}>
         <GlassKnot />
+        <OrbitRing radius={1.45} tilt={[Math.PI / 2.6, 0.3, 0]} speed={0.15} color={ACCENT} />
+        <OrbitRing radius={1.7} tilt={[Math.PI / 2.1, -0.5, 0.4]} speed={-0.1} color={ACCENT_2} />
         <AccentShard position={[-2.1, 1.1, -1]} scale={0.18} speed={1.4} color={ACCENT} />
         <AccentShard position={[2.2, -0.9, -0.5]} scale={0.14} speed={1.8} color={ACCENT_2} />
         <AccentShard position={[1.6, 1.4, -1.5]} scale={0.1} speed={2.2} color={ACCENT} />

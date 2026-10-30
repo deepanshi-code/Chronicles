@@ -27,9 +27,19 @@ export const projects: Project[] = [
       "Gemini API",
     ],
     repoUrl: "https://github.com/deepanshi-code/CropMind-Chatbot",
-    liveUrl: "https://crop-mind-chatbot-frontend.vercel.app",
+    liveUrl: "https://crop-mind-chatbot-ten.vercel.app",
     image: "/project-images/cropmind-chatbot.jpg",
     featured: true,
+  },
+  {
+    slug: "campus-lost-found",
+    title: "Campus Lost & Found",
+    summary:
+      "A mobile app for colleges to report, match, and reunite lost and found items — in progress.",
+    description:
+      "A React Native (Expo) app for colleges and schools: people report items they've lost or found, and the app ranks possible matches by keyword overlap, location, and date proximity — transparent and rule-based rather than a black-box model. Only institutional email domains can sign up, verified with an emailed 6-digit code. A claimant has to describe a detail that isn't in the post before contact details are shared, and email/phone are only revealed after the original poster approves. The backend is Node.js 22 and Express 5 with JWT auth and SQLite (via Node's built-in node:sqlite, no native build step), and photo uploads go through Multer. Solo project, working prototype — not yet deployed.",
+    techStack: ["React Native", "Expo", "Node.js", "Express 5", "SQLite"],
+    repoUrl: "https://github.com/deepanshi-code/LostFound",
   },
   {
     slug: "shrinkbyte",
