@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 
 const HeroScene = dynamic(() => import("./HeroScene"), {
@@ -27,8 +28,31 @@ export default function Hero3D() {
   }, []);
 
   return (
-    <div ref={containerRef} className="aspect-square w-full max-w-lg touch-none">
-      <HeroScene active={active} />
+    <div
+      ref={containerRef}
+      className="relative aspect-square w-full max-w-lg touch-none"
+    >
+      <div className="absolute inset-0">
+        <HeroScene active={active} />
+      </div>
+      <div
+        className="absolute inset-[8%] overflow-hidden"
+        style={{
+          maskImage:
+            "radial-gradient(circle closest-side at center, black 35%, transparent 100%)",
+          WebkitMaskImage:
+            "radial-gradient(circle closest-side at center, black 35%, transparent 100%)",
+        }}
+      >
+        <Image
+          src="/hero/android-head.jpg"
+          alt="Android head illustration"
+          fill
+          sizes="(min-width: 1024px) 512px, 90vw"
+          className="object-cover object-top"
+          priority
+        />
+      </div>
     </div>
   );
 }

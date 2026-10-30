@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useActiveSection } from "@/hooks/useActiveSection";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const sectionIds = ["home", "projects", "about", "contact"];
 const sections = [
@@ -46,27 +47,30 @@ export default function Navbar() {
             <span className="hidden sm:inline">Deepanshi Agarwal</span>
           </span>
         </Link>
-        <ul className="flex gap-4 text-xs sm:gap-8 sm:text-sm">
-          {sections.map((section) => {
-            const href = section.id === "home" ? "/" : `/#${section.id}`;
-            const active = isHome && activeId === section.id;
-            return (
-              <li key={section.id} className="relative">
-                <Link
-                  href={href}
-                  className={`transition-colors ${
-                    active ? "text-accent" : "text-muted hover:text-foreground"
-                  }`}
-                >
-                  {section.label}
-                </Link>
-                {active && (
-                  <span className="absolute -bottom-1.5 left-0 h-px w-full bg-accent" />
-                )}
-              </li>
-            );
-          })}
-        </ul>
+        <div className="flex items-center gap-4 sm:gap-8">
+          <ul className="flex gap-4 text-xs sm:gap-8 sm:text-sm">
+            {sections.map((section) => {
+              const href = section.id === "home" ? "/" : `/#${section.id}`;
+              const active = isHome && activeId === section.id;
+              return (
+                <li key={section.id} className="relative">
+                  <Link
+                    href={href}
+                    className={`transition-colors ${
+                      active ? "text-accent" : "text-muted hover:text-foreground"
+                    }`}
+                  >
+                    {section.label}
+                  </Link>
+                  {active && (
+                    <span className="absolute -bottom-1.5 left-0 h-px w-full bg-accent" />
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+          <ThemeToggle />
+        </div>
       </nav>
     </header>
   );

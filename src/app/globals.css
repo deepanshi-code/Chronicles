@@ -12,6 +12,19 @@
   --accent-2-ink: #03111c;
 }
 
+/* Steel grey / midnight charcoal / coral orange theme */
+:root[data-theme="coral"] {
+  --background: #17191c;
+  --surface: #1d2024;
+  --surface-border: rgba(255, 255, 255, 0.09);
+  --foreground: #f3f3f1;
+  --muted: #aab4bd;
+  --accent: #ff4b32;
+  --accent-ink: #17191c;
+  --accent-2: #aab4bd;
+  --accent-2-ink: #17191c;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import ArchitectureDiagram from "@/components/ArchitectureDiagram";
 import BrowserFrame from "@/components/BrowserFrame";
 import ContactForm from "@/components/ContactForm";
 import Reveal from "@/components/Reveal";
@@ -75,12 +76,42 @@ export default async function ProjectDetailPage({ params }: Props) {
           )}
         </div>
 
-        <p className="mt-10 whitespace-pre-line leading-relaxed text-muted">
-          {project.description}
+        <p className="mt-10 max-w-xl text-lg leading-relaxed text-muted">
+          {project.summary}
         </p>
       </Reveal>
 
-      <Reveal delay={0.1}>
+      {project.flowchart && (
+        <Reveal delay={0.1}>
+          <section className="mt-14 border-t border-surface-border pt-10">
+            <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+              Architecture
+            </p>
+            <h2 className="mt-3 text-2xl font-bold tracking-tight">
+              How it&apos;s built
+            </h2>
+            <div className="mt-8">
+              <ArchitectureDiagram flow={project.flowchart} />
+            </div>
+          </section>
+        </Reveal>
+      )}
+
+      <Reveal delay={0.15}>
+        <section className="mt-14 border-t border-surface-border pt-10">
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+            Details
+          </p>
+          <h2 className="mt-3 text-2xl font-bold tracking-tight">
+            Deep dive
+          </h2>
+          <p className="mt-6 whitespace-pre-line leading-relaxed text-muted">
+            {project.description}
+          </p>
+        </section>
+      </Reveal>
+
+      <Reveal delay={0.2}>
         <section className="mt-16 border-t border-surface-border pt-10">
           <h2 className="text-lg font-semibold">
             Have a question about this project?

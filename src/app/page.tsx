@@ -76,7 +76,7 @@ export default function Home() {
             </a>
           </div>
         </Reveal>
-        <Reveal delay={0.15} className="mx-auto">
+        <Reveal delay={0.15} className="mx-auto w-full">
           <Hero3D />
         </Reveal>
 

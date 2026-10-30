@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import BackgroundGlow from "@/components/BackgroundGlow";
+import GalaxyBackground from "@/components/GalaxyBackground";
 import GrainOverlay from "@/components/GrainOverlay";
 import PageTransition from "@/components/PageTransition";
 import SectionRail from "@/components/SectionRail";
@@ -29,9 +30,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "(function(){try{if(localStorage.getItem('theme')==='coral'){document.documentElement.setAttribute('data-theme','coral');}}catch(e){}})();",
+          }}
+        />
         <BackgroundGlow />
+        <GalaxyBackground />
         <GrainOverlay />
         <SectionRail />
         <Navbar />
