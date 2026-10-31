@@ -35,11 +35,14 @@ function layout(flow: Flowchart) {
   const layerOf = new Map<string, number>();
   nodes.forEach((n) => layerOf.set(n.id, 0));
 
-  for (let i = 0; i < nodes.length + edges.length; i++) {
+  // A true DAG's longest path can span at most nodes.length layers; capping
+  // the relaxation there (instead of a looser nodes+edges bound) keeps a
+  // stray cyclic edge from inflating the layout instead of just being inert.
+  for (let i = 0; i < nodes.length; i++) {
     let changed = false;
     edges.forEach((e) => {
       const candidate = (layerOf.get(e.from) ?? 0) + 1;
-      if ((layerOf.get(e.to) ?? 0) < candidate) {
+      if (candidate < nodes.length && (layerOf.get(e.to) ?? 0) < candidate) {
         layerOf.set(e.to, candidate);
         changed = true;
       }
