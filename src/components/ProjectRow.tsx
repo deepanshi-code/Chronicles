@@ -2,8 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import type { MouseEvent } from "react";
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import {
+  motion,
+  useMotionValue,
+  useScroll,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 import BrowserFrame from "@/components/BrowserFrame";
 import type { Project } from "@/data/projects";
 
@@ -21,13 +28,34 @@ export default function ProjectRow({
   });
 
   const opacity = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.3, 1, 1, 0.3]);
-  const scale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.96, 1, 1, 0.96]);
+  const scrollScale = useTransform(scrollYProgress, [0, 0.25, 0.75, 1], [0.96, 1, 1, 0.96]);
+
+  // Cursor-driven 3D tilt: pointer position within the card (-0.5 to 0.5
+  // on each axis) maps to a spring-smoothed rotation.
+  const pointerX = useMotionValue(0);
+  const pointerY = useMotionValue(0);
+  const springConfig = { stiffness: 300, damping: 30 };
+  const rotateX = useSpring(useTransform(pointerY, [-0.5, 0.5], [7, -7]), springConfig);
+  const rotateY = useSpring(useTransform(pointerX, [-0.5, 0.5], [-7, 7]), springConfig);
+
+  function handlePointerMove(event: MouseEvent<HTMLDivElement>) {
+    const rect = event.currentTarget.getBoundingClientRect();
+    pointerX.set((event.clientX - rect.left) / rect.width - 0.5);
+    pointerY.set((event.clientY - rect.top) / rect.height - 0.5);
+  }
+
+  function handlePointerLeave() {
+    pointerX.set(0);
+    pointerY.set(0);
+  }
 
   return (
     <motion.div
       ref={ref}
-      style={{ opacity, scale }}
-      className="group overflow-hidden rounded-2xl border border-surface-border bg-surface shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)] transition-all duration-300 hover:-translate-y-1 hover:border-accent/40 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.65)]"
+      onMouseMove={handlePointerMove}
+      onMouseLeave={handlePointerLeave}
+      style={{ opacity, scale: scrollScale, rotateX, rotateY, transformPerspective: 800 }}
+      className="group overflow-hidden rounded-2xl border border-surface-border bg-surface shadow-[0_8px_24px_-12px_rgba(0,0,0,0.5)] transition-[border-color,box-shadow] duration-300 hover:border-accent/40 hover:shadow-[0_24px_48px_-16px_rgba(0,0,0,0.65)]"
     >
       <Link href={`/projects/${project.slug}`} className="block">
         <div className="p-4 pb-0">

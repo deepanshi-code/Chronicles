@@ -4,6 +4,7 @@ import Hero3D from "@/components/hero/Hero3D";
 import ProjectRow from "@/components/ProjectRow";
 import Reveal from "@/components/Reveal";
 import ScrollCue from "@/components/ScrollCue";
+import StatCounter from "@/components/StatCounter";
 import { projects } from "@/data/projects";
 
 type SkillEntry = { name: string; match: string[] };
@@ -25,6 +26,46 @@ function projectsForSkill(skill: SkillEntry) {
     p.techStack.some((tech) => skill.match.includes(tech)),
   );
 }
+
+const liveProjectCount = projects.filter((p) => p.liveUrl).length;
+
+type ApproachCard = {
+  tag: string;
+  tagColor: "accent" | "accent-2";
+  title: string;
+  detail: string;
+};
+
+const approachCards: ApproachCard[] = [
+  {
+    tag: "89 tests",
+    tagColor: "accent",
+    title: "Tested in CI",
+    detail:
+      "UtsavAI ships with 89 unit tests and a GitHub Actions pipeline that runs lint, types, and tests on every push — not a one-off demo.",
+  },
+  {
+    tag: "Baseline-first",
+    tagColor: "accent-2",
+    title: "Validated, not assumed",
+    detail:
+      "Calcora's accuracy benchmark is proven with mutation testing; CodeAlpha and Bullion Basis compare every result against a baseline before trusting it.",
+  },
+  {
+    tag: "WCAG 2 AA",
+    tagColor: "accent",
+    title: "Accessible by default",
+    detail:
+      "UtsavAI passes an axe-core accessibility scan across all four themes; this portfolio respects your reduced-motion setting throughout.",
+  },
+  {
+    tag: `${liveProjectCount} of ${projects.length}`,
+    tagColor: "accent-2",
+    title: "Shipped, not just scoped",
+    detail:
+      "Most projects here are live, deployed demos you can click into — not just a repo link and a screenshot.",
+  },
+];
 
 export default function Home() {
   return (
@@ -76,6 +117,11 @@ export default function Home() {
               GitHub
             </a>
           </div>
+          <div className="mt-10 flex flex-wrap gap-8 border-t border-surface-border pt-8">
+            <StatCounter value={projects.length} label="Projects shipped" />
+            <StatCounter value={2} label="Internships" />
+            <StatCounter value={9.65} decimals={2} label="CGPA" />
+          </div>
         </Reveal>
         <Reveal delay={0.15} className="mx-auto w-full">
           <Hero3D />
@@ -107,12 +153,52 @@ export default function Home() {
       </section>
 
       <section
+        id="approach"
+        className="mx-auto max-w-5xl scroll-mt-20 border-t border-surface-border px-6 py-24"
+      >
+        <Reveal>
+          <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
+            02 — Approach
+          </p>
+          <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
+            How I build
+          </h2>
+          <p className="mt-4 max-w-md text-muted">
+            Practices that show up across every project, not just claims.
+          </p>
+        </Reveal>
+        <div className="mt-14 grid gap-4 sm:grid-cols-2">
+          {approachCards.map((card, i) => (
+            <Reveal key={card.title} delay={i * 0.05}>
+              <div
+                className={`h-full rounded-2xl border border-surface-border p-6 transition-colors hover:border-accent/40 ${
+                  card.tagColor === "accent"
+                    ? "bg-gradient-to-br from-accent/10 to-transparent"
+                    : "bg-gradient-to-br from-accent-2/10 to-transparent"
+                }`}
+              >
+                <p
+                  className={`font-mono text-xs uppercase tracking-wider ${
+                    card.tagColor === "accent" ? "text-accent" : "text-accent-2"
+                  }`}
+                >
+                  {card.tag}
+                </p>
+                <h3 className="mt-3 text-lg font-semibold">{card.title}</h3>
+                <p className="mt-2 text-sm text-muted">{card.detail}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+
+      <section
         id="about"
         className="mx-auto grid max-w-5xl scroll-mt-20 gap-12 px-6 py-24 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] lg:gap-16"
       >
         <Reveal className="lg:sticky lg:top-28 lg:self-start">
           <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-            02 — About
+            03 — About
           </p>
           <h2 className="mt-4 text-4xl font-bold tracking-tight sm:text-5xl">
             About
@@ -150,33 +236,34 @@ export default function Home() {
             <h3 className="font-mono text-xs uppercase tracking-[0.3em] text-muted">
               Skills — where I&apos;ve used them
             </h3>
-            <div className="mt-4 divide-y divide-surface-border border-y border-surface-border">
+            <div className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-4">
               {skillEntries.map((skill) => {
                 const used = projectsForSkill(skill);
+                const featured = used.length >= 3;
                 return (
                   <div
                     key={skill.name}
-                    className="flex flex-col gap-2 py-3 sm:flex-row sm:items-center sm:gap-6"
+                    className={`rounded-2xl border border-surface-border bg-gradient-to-br from-accent/10 to-accent-2/10 p-4 transition-colors hover:border-accent/40 ${
+                      featured ? "col-span-2 row-span-2" : ""
+                    }`}
                   >
-                    <span className="w-44 shrink-0 text-sm font-medium">
-                      {skill.name}
-                    </span>
+                    <p className="text-sm font-semibold">{skill.name}</p>
                     {used.length > 0 ? (
-                      <div className="flex flex-wrap gap-2">
+                      <div className="mt-2 flex flex-wrap gap-1.5">
                         {used.map((project) => (
                           <a
                             key={project.slug}
                             href={`/projects/${project.slug}`}
-                            className="rounded-full border border-surface-border px-2.5 py-1 text-xs text-muted transition-colors hover:border-accent hover:text-accent"
+                            className="rounded-full border border-surface-border px-2 py-0.5 text-[11px] text-muted transition-colors hover:border-accent hover:text-accent"
                           >
                             {project.title}
                           </a>
                         ))}
                       </div>
                     ) : (
-                      <span className="text-xs text-muted">
+                      <p className="mt-2 text-[11px] text-muted">
                         Coursework &amp; practice
-                      </span>
+                      </p>
                     )}
                   </div>
                 );
@@ -232,7 +319,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-xl text-center">
           <Reveal>
             <p className="font-mono text-xs uppercase tracking-[0.3em] text-accent">
-              03 — Contact
+              04 — Contact
             </p>
             <h2 className="mt-4 text-5xl font-bold tracking-tight sm:text-6xl">
               Let&apos;s build
