@@ -119,6 +119,57 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "conceptarium",
+    title: "Conceptarium",
+    summary:
+      "28 interactive 3D visualizations that turn hard-to-imagine engineering, CS, math, and physics concepts into things you can drag and click.",
+    description:
+      "A planetarium for engineering concepts, built for B.Tech and BCA students: 28 interactive 3D models covering orthographic projection, development of surfaces, beam diagrams, Fourier series, eigenvectors, 3D transformations, gradient descent, data structures (BST/AVL, heaps, B+ trees, hashing), sorting, CPU scheduling, electric fields, wave interference, projectile motion, logic gates, flip-flops, recursion, binary search, SHM, perceptrons, and page replacement — each one you can drag, click, or edit numbers on directly, not just watch. Hidden-line removal in the engineering-drawing views is computed geometrically (feature + silhouette edges, visibility decided by ray-casting toward the viewer), not hand-drawn. Every concept ends with a two-question self-check quiz, and a home page tracks what you've explored and mastered in localStorage. The underlying logic — the eigen-solver, optimizers, beam solver, Fourier series, sorts, CPU schedulers, and field solver — is written as pure, dependency-free functions that return animation frames, and is unit-tested with Node's built-in test runner against textbook formulas and finite differences, completely separate from the Three.js rendering. No framework or bundler: plain ES modules and Three.js from a CDN, deployable to GitHub Pages as-is. The landing page's aurora hero and glass search bar take inspiration from feedplane.com.",
+    techStack: ["JavaScript", "Three.js", "ES Modules", "Node test runner"],
+    flowchart: {
+      nodes: [
+        { id: "start", label: "Pick a concept", detail: "Search, concept-sky, or catalog", shape: "start" },
+        { id: "catalog", label: "Catalog + hash router", shape: "process" },
+        { id: "stage", label: "Shared 3D stage", detail: "Renderer, cameras, orbit controls", shape: "process" },
+        { id: "interact", label: "Direct interaction", detail: "Capture-phase drag & click", shape: "process" },
+        {
+          id: "logic",
+          label: "Pure concept logic",
+          detail: "linalg, optim, beam, DS, algorithms, physics — returns frames, no DOM",
+          shape: "process",
+        },
+        {
+          id: "tests",
+          label: "Checked against textbook formulas?",
+          detail: "Node test runner, finite differences",
+          shape: "decision",
+        },
+        { id: "renderer", label: "Animated renderer", detail: "Tweens nodes by id between frames", shape: "process" },
+        { id: "quiz", label: "Check-yourself quiz", shape: "process" },
+        { id: "progress", label: "Explored & mastered", detail: "Stored in localStorage", shape: "end" },
+      ],
+      edges: [
+        { from: "start", to: "catalog" },
+        { from: "catalog", to: "stage" },
+        { from: "catalog", to: "interact" },
+        { from: "stage", to: "logic" },
+        { from: "interact", to: "logic" },
+        { from: "logic", to: "tests" },
+        { from: "tests", to: "renderer", label: "Passes" },
+        { from: "renderer", to: "quiz" },
+        { from: "quiz", to: "progress" },
+      ],
+      clusters: [
+        { id: "client", label: "3D UI", color: CLIENT, nodeIds: ["catalog", "stage", "interact", "renderer", "quiz"] },
+        { id: "logic", label: "Pure logic", color: LOGIC, nodeIds: ["logic"] },
+        { id: "server", label: "Test suite", color: SERVER, nodeIds: ["tests"] },
+        { id: "data", label: "Local progress", color: DATA, nodeIds: ["progress"] },
+      ],
+    },
+    repoUrl: "https://github.com/deepanshi-code/conceptarium",
+    image: "/project-images/conceptarium.jpg",
+  },
+  {
     slug: "utsavai",
     title: "UtsavAI",
     summary:

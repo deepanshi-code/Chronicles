@@ -48,8 +48,8 @@ function Stars({ color, spin }: { color: string; spin: boolean }) {
 
   useFrame((_, delta) => {
     if (!ref.current || !spin) return;
-    ref.current.rotation.y += delta * 0.012;
-    ref.current.rotation.x += delta * 0.004;
+    ref.current.rotation.y += delta * 0.08;
+    ref.current.rotation.x += delta * 0.03;
   });
 
   return (
