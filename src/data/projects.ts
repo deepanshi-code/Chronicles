@@ -170,6 +170,88 @@ export const projects: Project[] = [
     image: "/project-images/conceptarium.jpg",
   },
   {
+    slug: "form-saathi",
+    title: "Form Saathi",
+    summary:
+      "Explains confusing Indian government and bank forms field-by-field, in English and Hindi — 39 verified guides.",
+    description:
+      "Official forms — bank, government, legal, college — use small print and jargon that trips up first-time applicants and older family members alike; a mistake means a rejected form, a repeat visit, or paying an agent. Form Saathi covers 39 forms (SBI, PNB, HDFC and other bank accounts, PAN, Aadhaar, voter ID, driving licence, passport, EPF, several Uttarakhand state certificates, and more) with a one-line plain-English and Hindi answer for every field, derived only from that field's own verified official source — never guessed. 35 of the 39 also have an 'on the form' view: the real form image with a spotlight box over each field, placed by hand-checked percentage coordinates. Every guide is explicitly marked verified or shown with a caution note when the official source is older or indirect, and the project states its own rules up front: no real personal data is ever stored, and the issuing office always has the final word. No build step — open index.html directly, or use the deployed static site.",
+    techStack: ["JavaScript", "HTML", "CSS"],
+    flowchart: {
+      nodes: [
+        { id: "start", label: "Pick a form", detail: "Search, situation picker, or category", shape: "start" },
+        { id: "registry", label: "Form registry + catalog", shape: "process" },
+        { id: "formModule", label: "Per-form module", detail: "Fields, quick answers, verified flag", shape: "process" },
+        { id: "cheat", label: "Fill-along cheat sheet", detail: "One-line answer per field, EN + HI", shape: "process" },
+        { id: "onForm", label: "'On the form' view", detail: "Spotlight box over the real form image", shape: "process" },
+        { id: "layout", label: "Layout coordinates", detail: "{page, x, y, w, h} per field, hand-checked", shape: "io" },
+        { id: "verify", label: "Checked against official source?", shape: "decision" },
+        { id: "verified", label: "Verified guide", shape: "end" },
+        { id: "caution", label: "Shown with caution note", shape: "end" },
+      ],
+      edges: [
+        { from: "start", to: "registry" },
+        { from: "registry", to: "formModule" },
+        { from: "formModule", to: "cheat" },
+        { from: "formModule", to: "onForm" },
+        { from: "onForm", to: "layout" },
+        { from: "formModule", to: "verify" },
+        { from: "verify", to: "verified", label: "Yes" },
+        { from: "verify", to: "caution", label: "Older/indirect" },
+      ],
+      clusters: [
+        { id: "client", label: "Static site", color: CLIENT, nodeIds: ["registry", "formModule", "cheat", "onForm"] },
+        { id: "data", label: "Field coordinates", color: DATA, nodeIds: ["layout"] },
+        { id: "logic", label: "Verification", color: LOGIC, nodeIds: ["verify"] },
+      ],
+    },
+    repoUrl: "https://github.com/deepanshi-code/Form_Saathi",
+    liveUrl: "https://deepanshi-code.github.io/Form_Saathi/",
+    image: "/project-images/form-saathi.jpg",
+  },
+  {
+    slug: "sugarsieve",
+    title: "SugarSieve",
+    summary:
+      "Tests whether quick measurements can replace a guideline rule for deciding who needs a diabetes glucose test — with a pre-registered negative result.",
+    description:
+      "Confirming Type 2 diabetes needs a full oral glucose tolerance test — fasting, a glucose drink, a 2-hour wait, a blood draw — too costly to give everyone. SugarSieve asks, with success criteria fixed before any modelling: can quick measurements alone (age, BMI, blood pressure, pregnancies, family history) beat a simple guideline rule at deciding who to refer? A data audit on the Pima Indians Diabetes dataset found the documentation wrong — zeros are used for missing values in about 48% of rows, and treating them as missing moves insulin's predictive signal from ROC-AUC 0.56 to 0.75. On a 154-patient held-out test set with bootstrap confidence intervals: the no-lab model did not beat the guideline rule (-5.6 points, CI -14.3 to +6.0) — reported as a negative result rather than reframed as a win — while a model using lab values did beat glucose alone (+0.048 ROC-AUC, CI +0.004 to +0.095), mainly by catching cases the age-gated rule structurally cannot (it never refers anyone under 35). Plain logistic regression beat Random Forest and Gradient Boosting in cross-validation. Deployed as a Streamlit app that shows a risk band and the reasons behind it, not a bare percentage, and states its own limits: a single-population learning exercise, not a validated medical device.",
+    techStack: ["Python", "scikit-learn", "pandas", "Streamlit"],
+    flowchart: {
+      nodes: [
+        { id: "start", label: "Pima diabetes dataset", detail: "768 patients, NIDDK", shape: "start" },
+        { id: "audit", label: "Data audit", detail: "Zeros as missing, 48% of rows", shape: "process" },
+        { id: "split", label: "Fixed train/test split", detail: "Criteria set before modelling", shape: "process" },
+        { id: "cv", label: "Repeated CV model selection", detail: "Logistic regression beat RF, GB", shape: "process" },
+        { id: "baseline", label: "Guideline rule baseline", detail: "Age ≥ 35 and BMI ≥ 25", shape: "io" },
+        { id: "test", label: "Held-out test evaluation", detail: "154 patients, bootstrap CI", shape: "decision" },
+        { id: "noLab", label: "No-lab model vs. rule", detail: "-5.6 pts: not met", shape: "process" },
+        { id: "labModel", label: "Full model vs. glucose alone", detail: "+0.048 ROC-AUC: met", shape: "process" },
+        { id: "app", label: "Streamlit referral app", detail: "Risk band + reasons, not a diagnosis", shape: "end" },
+      ],
+      edges: [
+        { from: "start", to: "audit" },
+        { from: "audit", to: "split" },
+        { from: "split", to: "cv" },
+        { from: "baseline", to: "test" },
+        { from: "cv", to: "test" },
+        { from: "test", to: "noLab", label: "No-lab vs rule" },
+        { from: "test", to: "labModel", label: "Full vs glucose" },
+        { from: "noLab", to: "app" },
+        { from: "labModel", to: "app" },
+      ],
+      clusters: [
+        { id: "data", label: "Data", color: DATA, nodeIds: ["start", "audit", "baseline"] },
+        { id: "logic", label: "Modelling", color: LOGIC, nodeIds: ["split", "cv"] },
+        { id: "server", label: "Evaluation", color: SERVER, nodeIds: ["test", "noLab", "labModel"] },
+        { id: "client", label: "Deployed app", color: CLIENT, nodeIds: ["app"] },
+      ],
+    },
+    repoUrl: "https://github.com/deepanshi-code/SugarSieve",
+    liveUrl: "https://sugarsieve.streamlit.app",
+    image: "/project-images/sugarsieve.jpg",
+  },
+  {
     slug: "utsavai",
     title: "UtsavAI",
     summary:
